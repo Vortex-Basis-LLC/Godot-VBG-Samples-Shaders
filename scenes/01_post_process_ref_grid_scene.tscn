@@ -1,7 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn4cy3divpldk"]
+[gd_scene load_steps=9 format=3 uid="uid://cn4cy3divpldk"]
 
 [ext_resource type="PackedScene" uid="uid://bh2qxp7k2qrkh" path="res://scenes/base_scene.tscn" id="1_u0pp0"]
 [ext_resource type="Shader" path="res://shaders/post_process_ref_grid.gdshader" id="2_lc8ln"]
+[ext_resource type="PackedScene" uid="uid://c2o2k4t0b3wtc" path="res://players/hover_cam_player.tscn" id="3_asrtl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8jord"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3fhw1"]
+sky_material = SubResource("ProceduralSkyMaterial_8jord")
+
+[sub_resource type="Environment" id="Environment_kcdpd"]
+background_mode = 2
+sky = SubResource("Sky_3fhw1")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nto1f"]
 render_priority = 0
@@ -19,7 +33,14 @@ size = Vector2(2, 2)
 
 [node name="BaseScene" instance=ExtResource("1_u0pp0")]
 
-[node name="Floor" parent="." index="0"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_kcdpd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605546, 0)
 
 [node name="Torus" parent="Node3D" index="1"]
@@ -28,10 +49,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.2
 [node name="Cube" parent="Node3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28999, 1.96503, -1.60589)
 
-[node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(0.838671, 0, -0.544639, 0, 1, 0, 0.544639, 0, 0.838671, -3.575, 2.61, 1.275)
-
-[node name="PostProcessRefGrid" type="MeshInstance3D" parent="." index="3"]
+[node name="PostProcessRefGrid" type="MeshInstance3D" parent="." index="4"]
 material_override = SubResource("ShaderMaterial_nto1f")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_n28w6")
+
+[node name="HoverCamPlayer" parent="." index="5" instance=ExtResource("3_asrtl")]
+transform = Transform3D(0.945456, 0, -0.32575, 0, 1, 0, 0.32575, 0, 0.945456, -4.95876, 2.08227, 1.78515)
