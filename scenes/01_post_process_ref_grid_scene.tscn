@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn4cy3divpldk"]
+
+[ext_resource type="PackedScene" uid="uid://bh2qxp7k2qrkh" path="res://scenes/base_scene.tscn" id="1_u0pp0"]
+[ext_resource type="Shader" path="res://shaders/post_process_ref_grid.gdshader" id="2_lc8ln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nto1f"]
+render_priority = 0
+shader = ExtResource("2_lc8ln")
+shader_parameter/grid_mode = 1
+shader_parameter/grid_origin = Vector3(0, 0, 0)
+shader_parameter/grid_scale = 1.0
+shader_parameter/depth_min = 0.0
+shader_parameter/depth_max = 50.0
+shader_parameter/mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_n28w6"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="BaseScene" instance=ExtResource("1_u0pp0")]
+
+[node name="Floor" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605546, 0)
+
+[node name="Torus" parent="Node3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.27939, -3)
+
+[node name="Cube" parent="Node3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28999, 1.96503, -1.60589)
+
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(0.838671, 0, -0.544639, 0, 1, 0, 0.544639, 0, 0.838671, -3.575, 2.61, 1.275)
+
+[node name="PostProcessRefGrid" type="MeshInstance3D" parent="." index="3"]
+material_override = SubResource("ShaderMaterial_nto1f")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_n28w6")
