@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bfngroa6jucgk"]
+
+[ext_resource type="Shader" path="res://shaders/noisy_roughness.gdshader" id="1_4egh2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jhqga"]
+frequency = 0.04
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w204s"]
+seamless = true
+noise = SubResource("FastNoiseLite_jhqga")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_4egh2")
+shader_parameter/base_color = Color(0.3, 0.6, 0.3, 1)
+shader_parameter/roughness_min = 0.3
+shader_parameter/roughness_max = 1.0
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_w204s")
