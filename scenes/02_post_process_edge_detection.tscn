@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://000whn5kccau"]
+
+[ext_resource type="PackedScene" uid="uid://bh2qxp7k2qrkh" path="res://scenes/base_scene.tscn" id="1_cb76a"]
+[ext_resource type="Shader" path="res://shaders/post_process_edge_detection.gdshader" id="2_3uvh6"]
+[ext_resource type="PackedScene" uid="uid://c2o2k4t0b3wtc" path="res://players/hover_cam_player.tscn" id="3_vhmmf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_df0kr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3fhw1"]
+sky_material = SubResource("ProceduralSkyMaterial_df0kr")
+
+[sub_resource type="Environment" id="Environment_vdm1i"]
+background_mode = 2
+sky = SubResource("Sky_3fhw1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mg7tm"]
+render_priority = 0
+shader = ExtResource("2_3uvh6")
+shader_parameter/line_width = 3
+shader_parameter/depth_diff_scalar = 1000.0
+shader_parameter/depth_diff_power = 2.0
+shader_parameter/normal_diff_scalar = 1000.0
+shader_parameter/normal_diff_power = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_fy7dk"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="BaseScene" instance=ExtResource("1_cb76a")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
+environment = SubResource("Environment_vdm1i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PostProcessEdgeDetection" type="MeshInstance3D" parent="." index="5"]
+material_override = SubResource("ShaderMaterial_mg7tm")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_fy7dk")
+
+[node name="HoverCamPlayer" parent="." index="6" instance=ExtResource("3_vhmmf")]
+transform = Transform3D(0.945456, 0, -0.32575, 0, 1, 0, 0.32575, 0, 0.945456, -4.95876, 2.08227, 1.78515)
