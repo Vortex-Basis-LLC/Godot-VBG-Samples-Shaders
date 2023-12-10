@@ -20,11 +20,12 @@ glow_enabled = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg7tm"]
 render_priority = 0
 shader = ExtResource("2_3uvh6")
-shader_parameter/line_width = 3
-shader_parameter/depth_diff_scalar = 1000.0
-shader_parameter/depth_diff_power = 2.0
-shader_parameter/normal_diff_scalar = 1000.0
-shader_parameter/normal_diff_power = 2.0
+shader_parameter/line_width = 2
+shader_parameter/depth_diff_scalar = 2200.0
+shader_parameter/depth_diff_power = 5.0
+shader_parameter/normal_diff_scalar = 20.0
+shader_parameter/normal_diff_power = 3.0
+shader_parameter/linear_depth_cutoff = 7.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_fy7dk"]
 flip_faces = true
