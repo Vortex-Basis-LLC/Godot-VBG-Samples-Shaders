@@ -8,12 +8,12 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_3fhw1"]
+[sub_resource type="Sky" id="Sky_wov6i"]
 sky_material = SubResource("ProceduralSkyMaterial_df0kr")
 
 [sub_resource type="Environment" id="Environment_vdm1i"]
 background_mode = 2
-sky = SubResource("Sky_3fhw1")
+sky = SubResource("Sky_wov6i")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -21,8 +21,8 @@ glow_enabled = true
 render_priority = 0
 shader = ExtResource("2_3uvh6")
 shader_parameter/line_width = 2
-shader_parameter/depth_diff_scalar = 2200.0
-shader_parameter/depth_diff_power = 5.0
+shader_parameter/depth_diff_scalar = 1000.0
+shader_parameter/depth_diff_power = 2.0
 shader_parameter/normal_diff_scalar = 20.0
 shader_parameter/normal_diff_power = 3.0
 shader_parameter/linear_depth_cutoff = 7.0
