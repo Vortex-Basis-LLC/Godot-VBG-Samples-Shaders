@@ -1,0 +1,45 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dg2v25dgea2ew"
+path="res://.godot/imported/willow.glb-bafb1a7aa79b6b60100d9e8811d3bab4.scn"
+
+[deps]
+
+source_file="res://models/trees/willow/willow.glb"
+dest_files=["res://.godot/imported/willow.glb-bafb1a7aa79b6b60100d9e8811d3bab4.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"willow_bark": {
+"use_external/enabled": true,
+"use_external/path": "res://models/trees/willow/willow_bark.tres"
+},
+"willow_branch": {
+"use_external/enabled": true,
+"use_external/path": "res://models/trees/willow/willow_branch.tres"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

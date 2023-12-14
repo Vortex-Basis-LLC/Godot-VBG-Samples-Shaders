@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://m0ptf6w5wgpk"]
+
+[ext_resource type="Texture2D" uid="uid://rianxy1tu6ns" path="res://models/trees/willow/willow_willow_bark.png" id="1_7bon1"]
+
+[resource]
+resource_name = "willow_bark"
+cull_mode = 2
+albedo_texture = ExtResource("1_7bon1")
