@@ -3,16 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://dg2v25dgea2ew" path="res://models/trees/willow/willow.glb" id="1_efqp7"]
 [ext_resource type="Material" uid="uid://m0ptf6w5wgpk" path="res://models/trees/willow/willow_bark.tres" id="2_6f8vk"]
 [ext_resource type="Shader" path="res://shaders/vegetation/vegetation_wind_shader.gdshader" id="3_1dlbk"]
-[ext_resource type="Texture2D" uid="uid://bonvv7ovln7xo" path="res://models/trees/willow/willow_willow_branch.png" id="3_af53s"]
+[ext_resource type="Texture2D" uid="uid://bonvv7ovln7xo" path="res://models/trees/willow/willow_willow_branch.png" id="4_w5bwh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6fe4"]
 resource_name = "willow_branch"
 render_priority = 0
 shader = ExtResource("3_1dlbk")
-shader_parameter/sway_speed = 2.0
-shader_parameter/sway_strength = 0.1
-shader_parameter/sway_phase_len = 8.0
-shader_parameter/texture_albedo = ExtResource("3_af53s")
+shader_parameter/texture_albedo = ExtResource("4_w5bwh")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_73pbc"]
 _surfaces = [{

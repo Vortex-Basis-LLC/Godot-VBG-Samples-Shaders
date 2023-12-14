@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhhx05q8jhyix"]
+
+[ext_resource type="PackedScene" uid="uid://bh2qxp7k2qrkh" path="res://scenes/base_scene.tscn" id="1_kvm4a"]
+[ext_resource type="PackedScene" uid="uid://c2o2k4t0b3wtc" path="res://players/hover_cam_player.tscn" id="2_x1ghn"]
+[ext_resource type="Shader" path="res://shaders/post_process_kuwahara_brightness_gradient.gdshader" id="3_b3xtc"]
+[ext_resource type="Shader" path="res://shaders/kuwahara/kuwahara_simple.gdshader" id="3_ok40q"]
+[ext_resource type="PackedScene" uid="uid://ba1oq83g7pahu" path="res://models/trees/willow/willow_wind.tscn" id="6_hd8yc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c6m6l"]
+
+[sub_resource type="Sky" id="Sky_iykwt"]
+sky_material = SubResource("ProceduralSkyMaterial_c6m6l")
+
+[sub_resource type="Environment" id="Environment_8m21v"]
+background_mode = 2
+sky = SubResource("Sky_iykwt")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ett0"]
+render_priority = 0
+shader = ExtResource("3_ok40q")
+shader_parameter/window_size = Vector2i(5, 3)
+
+[sub_resource type="QuadMesh" id="QuadMesh_cfufq"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni7tk"]
+render_priority = 0
+shader = ExtResource("3_b3xtc")
+shader_parameter/window_size = Vector2i(5, 3)
+
+[node name="BaseScene" instance=ExtResource("1_kvm4a")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
+environment = SubResource("Environment_8m21v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="HoverCamPlayer" parent="." index="5" instance=ExtResource("2_x1ghn")]
+transform = Transform3D(0.945456, 0, -0.32575, 0, 1, 0, 0.32575, 0, 0.945456, -4.95876, 2.08227, 1.78515)
+
+[node name="KuwaharaSimple" type="MeshInstance3D" parent="." index="6"]
+visible = false
+material_override = SubResource("ShaderMaterial_8ett0")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_cfufq")
+
+[node name="Kuwahara" type="MeshInstance3D" parent="." index="7"]
+material_override = SubResource("ShaderMaterial_ni7tk")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_cfufq")
+
+[node name="willow1" parent="." index="8" instance=ExtResource("6_hd8yc")]
+transform = Transform3D(-0.542001, 0, 0.840378, 0, 1, 0, -0.840378, 0, -0.542001, 5.53804, 0.5, 1.23845)
+
+[node name="willow2" parent="." index="9" instance=ExtResource("6_hd8yc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04489, 0.5, -2.11657)
