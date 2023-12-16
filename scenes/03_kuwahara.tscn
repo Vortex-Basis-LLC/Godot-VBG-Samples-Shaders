@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhhx05q8jhyix"]
+[gd_scene load_steps=13 format=3 uid="uid://bhhx05q8jhyix"]
 
 [ext_resource type="PackedScene" uid="uid://bh2qxp7k2qrkh" path="res://scenes/base_scene.tscn" id="1_kvm4a"]
+[ext_resource type="Script" path="res://scenes/kuwahara_scene.gd" id="2_b84bd"]
 [ext_resource type="PackedScene" uid="uid://c2o2k4t0b3wtc" path="res://players/hover_cam_player.tscn" id="2_x1ghn"]
 [ext_resource type="Shader" path="res://shaders/post_process_kuwahara_brightness_gradient.gdshader" id="3_b3xtc"]
 [ext_resource type="Shader" path="res://shaders/kuwahara/kuwahara_simple.gdshader" id="3_ok40q"]
@@ -31,7 +32,8 @@ render_priority = 0
 shader = ExtResource("3_b3xtc")
 shader_parameter/window_size = Vector2i(5, 3)
 
-[node name="BaseScene" instance=ExtResource("1_kvm4a")]
+[node name="KuwaharaScene" instance=ExtResource("1_kvm4a")]
+script = ExtResource("2_b84bd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
 environment = SubResource("Environment_8m21v")
