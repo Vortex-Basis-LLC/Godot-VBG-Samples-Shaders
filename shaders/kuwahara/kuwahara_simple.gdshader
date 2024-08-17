@@ -11,7 +11,7 @@ void vertex()
 {
 	// Place the post-processing mesh surface directly in front of the camera.
 	// The coordinates of the mesh should already be in NDC space.
-	POSITION = vec4(VERTEX, 1.0);
+	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
 }
 
 
