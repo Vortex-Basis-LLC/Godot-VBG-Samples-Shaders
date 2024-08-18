@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	# camera look
 	var look_dir_y := Input.get_axis("look_down", "look_up")
 	
-	var look_dir_x := Input.get_axis("look_left", "look_right")		
+	var look_dir_x := Input.get_axis("look_left", "look_right")
 	self.rotate_y(-look_dir_x * joystick_camera_rotation_speed.x * delta)
 	set_vertical_look_angle(camera_3d.rotation.x + (look_dir_y * joystick_camera_rotation_speed.y * delta))
 

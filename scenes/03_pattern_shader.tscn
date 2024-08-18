@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c30bjqjbn8umv"]
+
+[ext_resource type="Shader" path="res://shaders/patterns/voronoi_grid_shader.gdshader" id="1_o35yd"]
+[ext_resource type="Shader" path="res://shaders/patterns/hex_grid_shader.gdshader" id="2_xtrew"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_52mh2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0mtpv"]
+render_priority = 0
+shader = ExtResource("1_o35yd")
+shader_parameter/uv_scale = Vector2(8, 8)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/mod_cell_coords_with_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8tok"]
+render_priority = 0
+shader = ExtResource("2_xtrew")
+shader_parameter/cell_size = 1.0
+shader_parameter/uv_scale = Vector2(20, 20)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/edge_threshold = 0.7
+shader_parameter/edge_mask_diff_start = 0.0
+shader_parameter/edge_mask_diff_end = 0.01
+
+[sub_resource type="Environment" id="Environment_30gp5"]
+
+[node name="03PatternShader" type="Node3D"]
+
+[node name="Patterns" type="Node" parent="."]
+
+[node name="VoronoiGrid" type="MeshInstance3D" parent="Patterns"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_52mh2")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_0mtpv")
+
+[node name="HexGrid" type="MeshInstance3D" parent="Patterns"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_52mh2")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_x8tok")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+projection = 1
+current = true
+size = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_30gp5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.00163)

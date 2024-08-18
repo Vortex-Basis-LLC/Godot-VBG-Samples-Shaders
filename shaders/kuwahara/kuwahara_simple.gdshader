@@ -7,7 +7,7 @@ uniform sampler2D depth_texture: source_color, hint_depth_texture, filter_neares
 
 uniform ivec2 window_size = ivec2(5,3);
 
-void vertex() 
+void vertex()
 {
 	// Place the post-processing mesh surface directly in front of the camera.
 	// The coordinates of the mesh should already be in NDC space.
@@ -20,8 +20,8 @@ void vertex()
 
 vec4 calc_mean_and_variance_for_window(sampler2D sampler, vec2 uv, ivec2 window_x, ivec2 window_y, vec2 pixel_size)
 {
-    vec3 total = vec3(0.0);    
-    int count = 0;    
+    vec3 total = vec3(0.0);
+    int count = 0;
     for (int i = window_x.x; i <= window_x.y; i++)
     {
         for (int j = window_y.x; j <= window_y.y; j++)
@@ -30,14 +30,14 @@ vec4 calc_mean_and_variance_for_window(sampler2D sampler, vec2 uv, ivec2 window_
             vec2 sample_uv = uv + uv_offset;
             vec3 col = texture(sampler, sample_uv).rgb;
 
-            total += col;            
+            total += col;
             count++;
         }
     }
-    
+
     vec3 mean = total / float(count);
-    
-    // Calculate variance.    
+
+    // Calculate variance.
     float square_diff_total = 0.0;
     {
         for (int i = window_x.x; i <= window_x.y; i++)
@@ -55,7 +55,7 @@ vec4 calc_mean_and_variance_for_window(sampler2D sampler, vec2 uv, ivec2 window_
         }
     }
 
-    float variance = square_diff_total / float(count); 
+    float variance = square_diff_total / float(count);
     return vec4(mean.r, mean.g, mean.b, variance);
 }
 
@@ -63,9 +63,9 @@ vec4 calc_mean_and_variance_for_window(sampler2D sampler, vec2 uv, ivec2 window_
 void fragment() {
 	// The original final color of the rendered pixel.
 	vec3 original_color = texture(screen_texture, SCREEN_UV).rgb;
-	
+
 	// Kuwahara filter calculates mean/variance for 4 quadrants around a pixel
-	// and then use the mean color for the quadrant that has the lowest variance.	
+	// and then use the mean color for the quadrant that has the lowest variance.
 
 	vec2 pixel_size = 1.0 / VIEWPORT_SIZE;
 
@@ -99,6 +99,5 @@ void fragment() {
 	    min_variation_seen = quadrant4.a;
 	}
 
-	ALBEDO = mean_to_use;	
+	ALBEDO = mean_to_use;
 }
-
